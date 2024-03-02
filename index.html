@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <main class="" id="quote-box">
+      <p id="text"></p>
+      <p id="author"></p>
+      <div class="buttons">
+        <a href="twitter.com/intent/tweet" target="_blank" id="tweet-quote"
+          >Twittear</a
+        >
+        <button id="new-quote">New Quote</button>
+      </div>
+    </main>
+    <script>
+      $(document).ready(function () {
+        const getQuote = () => {
+          return fetch("https://api.quotable.io/random").then((res) =>
+            res.json()
+          );
+        };
+
+        const getRandomColor = () => {
+          let letters = '0123456789ABCDEF'
+          let color = '#'
+          for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)]
+          }
+          return color
+        }
+
+        const changeColor = () => {
+          let color = getRandomColor();
+          $("body").css("background-color", color);
+          $("body").css("color", color);
+          $('#new-quote').css('border', 'solid 2px' + color)
+        };
+
+        const showQuote = () => {
+          getQuote().then((data) => {
+            $("#text").text(data.content);
+            $("#author").text(`- ${data.author}`);
+            $("#tweet-quote").attr(
+              "href",
+              "https://twitter.com/intent/tweet?text=" +
+                encodeURIComponent(data.content + " - " + data.author)
+            );
+            changeColor();
+          });
+        };
+        showQuote();
+
+        $("#new-quote").on("click", () => {
+          showQuote();
+        });
+      });
+    </script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  </body>
+</html>
