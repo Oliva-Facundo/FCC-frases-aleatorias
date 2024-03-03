@@ -28,6 +28,4 @@ Una vez que hayas terminado, envía la URL de tu proyecto con todas las pruebas 
 
 Nota: Twitter no permite cargar enlaces en un iframe. Prueba a utilizar el atributo target="\_blank" o target="\_top" en el elemento #tweet-quote si tu tweet no se carga. target="\_top" sustituirá a la pestaña actual, así que asegúrate de que tu trabajo está guardado.
 
-Traducción realizada con la versión gratuita del traductor DeepL.com
-
 https://api.quotable.io/random
